@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-struct nodo
+struct nodo// mal 
 {
     float valor;
     nodo *siguiente = NULL;
