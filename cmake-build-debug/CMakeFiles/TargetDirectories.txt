@@ -1,0 +1,3 @@
+C:/Users/Pablo/CLionProjects/intento2/cmake-build-debug/CMakeFiles/intento2.dir
+C:/Users/Pablo/CLionProjects/intento2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Pablo/CLionProjects/intento2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
