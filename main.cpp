@@ -220,21 +220,41 @@ void Invertir()
 
     cout << endl << "Lista invertida correctamente" << endl;
 }
-void Intercambiar(int pos1, int pos2) //unlink los dos nodos y luego link'em en la pos del otro
+void Intercambiar(int pos1, int pos2)
 {
-    nodo *aux1, *aux2;
-    for (int i = 1; i <= pos1; i++) // antes, comparar cual es menor (pos1 o pos2) para que no se vayan las posiciones a la puta
+    nodo *aux1 = inicio, *aux2 = inicio, *aux3 = inicio;
+    for (int i = 1; i < pos1; i++)
     {
         aux1 = aux1 -> siguiente;
     }
     aux1 -> anterior -> siguiente = aux1 -> siguiente;
     aux1 -> siguiente -> anterior = aux1 -> anterior;
-    for (int i = 1; i <= pos2; i++)
+    cout << "aux1 = " << aux1 -> valor << endl;
+    for (int i = 1; i < pos2 - 1; i++)
     {
         aux2 = aux2 -> siguiente;
     }
     aux2 -> anterior -> siguiente = aux2 -> siguiente;
     aux2 -> siguiente -> anterior = aux2 -> anterior;
+    cout << "aux2 = " << aux2 -> valor << endl;
+    for (int i = 1; i <= pos2; i++)
+    {
+        if (i == pos1 - 1)
+        {
+            aux2 -> siguiente = aux3 -> siguiente;
+            aux2 -> anterior = aux3;
+            aux3 -> siguiente -> anterior = aux2;
+            aux3 -> siguiente = aux2;
+        }
+        else if (i == pos2 - 1)
+        {
+            aux1 -> siguiente = aux3 -> siguiente;
+            aux1 -> anterior = aux3;
+            aux3 -> siguiente -> anterior = aux1;
+            aux3 -> siguiente = aux1;
+        }
+        aux3 = aux3 -> siguiente;
+    }
 }
 int main() // probar tambien: *final siempre es *inicio -> anterior (podria prescindir de uno de ellos?)
 {
@@ -252,7 +272,7 @@ int main() // probar tambien: *final siempre es *inicio -> anterior (podria pres
         cout << "[7]  Comprobar si la lista esta ordenada" << endl;              // Funciona bien
         cout << "[8]  Eliminar elemento elegido y sus iguales" << endl;          // Funciona bien
         cout << "[9]  Invertir la lista" << endl;                                // Funciona bien
-        cout << "[10] Intercambiar 2 elementos elegidos" << endl;                //
+        cout << "[10] Intercambiar 2 elementos elegidos" << endl;                // Se ralla al cambiar el primer elemento
         cout << "[0]  SALIR" << endl;                                            // Funciona bien
         cout << "INGRESE SU ELECCION: ";
         cin >> eleccion;
