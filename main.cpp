@@ -127,7 +127,7 @@ void HallarMayor()
         if (i == 1) { cout << "z." << endl; } else { cout << "ces." << endl; }
     }
 }
-void SumarTodo()//mal esta funciom
+void SumarTodo()
 {
     nodo *aux = inicio;
     float sumatorio = 0;
@@ -184,13 +184,11 @@ void Eliminar(int value)
                 }
                 else
                 {
-                    nodo *predecesor = aux -> anterior;
                     aux -> anterior -> siguiente = aux -> siguiente;
                     aux -> siguiente -> anterior = aux -> anterior;
                     if (aux == inicio) { inicio = aux -> siguiente; }
                     else if (aux == final) { final = aux -> anterior; }
-                    delete aux;
-                    aux = predecesor -> siguiente;
+                    aux -> valor = NULL;
                     i++;
                 }
             }
@@ -256,24 +254,24 @@ void Intercambiar(int pos1, int pos2)
         aux3 = aux3 -> siguiente;
     }
 }
-int main() // probar tambien: *final siempre es *inicio -> anterior (podria prescindir de uno de ellos?)
+int main() // probar tambien: *final siempre es *inicio -> anterior (podria prescindir de uno de el?)
 {
     float value = 0;
     int eleccion;
     do
     {
         cout << endl << "o o o o o o o o o o MENU o o o o o o o o o o" << endl;
-        cout << "[1]  Mostrar la lista" << endl;                                 // Funciona bien
-        cout << "[2]  Insertar elemento al principio" << endl;                   // Funciona bien
-        cout << "[3]  Insertar elemento al final" << endl;                       // Funciona bien
-        cout << "[4]  Insertar elemento en la posicion elegida" << endl;         // Funciona bien
-        cout << "[5]  Hallar el valor mayor" << endl;                            // Funciona bien
-        cout << "[6]  Mostrar la suma todos los elementos" << endl;              // Funciona bien
-        cout << "[7]  Comprobar si la lista esta ordenada" << endl;              // Funciona bien
-        cout << "[8]  Eliminar elemento elegido y sus iguales" << endl;          // Funciona bien
-        cout << "[9]  Invertir la lista" << endl;                                // Funciona bien
-        cout << "[10] Intercambiar 2 elementos elegidos" << endl;                // Se ralla al cambiar el primer elemento
-        cout << "[0]  SALIR" << endl;                                            // Funciona bien
+        cout << "[1]  Mostrar la lista" << endl;                         // Funciona bien
+        cout << "[2]  Insertar nodo al principio" << endl;               // Funciona bien
+        cout << "[3]  Insertar nodo al final" << endl;                   // Funciona bien
+        cout << "[4]  Insertar nodo en la posicion elegida" << endl;     // Funciona bien
+        cout << "[5]  Hallar el valor mayor" << endl;                    // Funciona bien
+        cout << "[6]  Mostrar la suma todos los nodos" << endl;          // Funciona bien
+        cout << "[7]  Comprobar si la lista esta ordenada" << endl;      // Funciona bien
+        cout << "[8]  Eliminar valor elegido y sus iguales" << endl;     // Si el 1º nodo tiene ese valor, solo borra el 1º
+        cout << "[9]  Invertir la lista" << endl;                        // Funciona bien
+        cout << "[10] Intercambiar 2 elementos elegidos" << endl;        // Se ralla al cambiar el 1º o ultimo nodo
+        cout << "[0]  SALIR" << endl;                                    // Funciona bien
         cout << "INGRESE SU ELECCION: ";
         cin >> eleccion;
 
