@@ -32,28 +32,6 @@ void Mostrar()
         cout << endl;
     }
 }
-void InsertarFinal(int value)
-{
-    if(final == NULL)
-    {
-        nodo *aux = new nodo;
-        aux -> valor = value;
-        final = aux;
-        inicio = aux;
-    }
-    else
-    {
-        nodo *aux= new nodo;
-        final -> siguiente = aux;
-        aux -> valor = value;
-        aux -> siguiente = NULL;
-        aux -> anterior = final;
-        final = aux;
-        final -> siguiente = inicio;
-        inicio -> anterior = final;
-    }
-    cout << endl << "Elemento anadido correctamente." << endl;
-}
 void InsertarInicio(int value)
 {
     nodo *aux = new nodo;
@@ -72,6 +50,28 @@ void InsertarInicio(int value)
         aux -> siguiente = inicio;
         aux -> anterior = NULL;
         inicio = aux;
+        final -> siguiente = inicio;
+        inicio -> anterior = final;
+    }
+    cout << endl << "Elemento anadido correctamente." << endl;
+}
+void InsertarFinal(int value)
+{
+    if(final == NULL)
+    {
+        nodo *aux = new nodo;
+        aux -> valor = value;
+        final = aux;
+        inicio = aux;
+    }
+    else
+    {
+        nodo *aux= new nodo;
+        final -> siguiente = aux;
+        aux -> valor = value;
+        aux -> siguiente = NULL;
+        aux -> anterior = final;
+        final = aux;
         final -> siguiente = inicio;
         inicio -> anterior = final;
     }
@@ -162,49 +162,67 @@ void ComprobarOrdenada()
         cout << endl << "La lista " << ordenada << " esta ordenada" << endl;
     }
 }
-void Eliminar(int value)
+void EliminarUno(nodo *aux)
+{
+    aux -> anterior -> siguiente = aux -> siguiente;
+    aux -> siguiente -> anterior = aux -> anterior;
+    if (aux == inicio) { inicio = aux -> siguiente; }
+    else if (aux == final) { final = aux -> anterior; }
+    aux -> valor = NULL;
+}
+void EliminarIterativo(int value)
 {
     nodo *aux = inicio;
-    int i = 0;
+    int i;
     if (inicio == NULL) { cout << endl << "Su lista esta vacia." << endl; }
+    else if (inicio == final)
+    {
+        delete aux;
+        aux = NULL;
+        inicio = NULL;
+        final = NULL;
+    }
     else
     {
         do
         {
-            if (aux -> valor == value) //hola
+            i = 0;
+            do
             {
-                if (inicio == final)
+                if (aux -> valor == value)
                 {
-                    delete aux;
-                    aux = NULL;
-                    inicio = NULL;
-                    final = NULL;
+                    EliminarUno(aux);
                     i++;
                 }
                 else
                 {
-                    aux -> anterior -> siguiente = aux -> siguiente;
-                    aux -> siguiente -> anterior = aux -> anterior;
-                    if (aux == inicio) { inicio = aux -> siguiente; }
-                    else if (aux == final) { final = aux -> anterior; }
-                    aux -> valor = NULL;
-                    i++;
+                    aux = aux -> siguiente;
                 }
-            }
-            else
-            {
-                aux = aux -> siguiente;
-            }
-        } while (aux != inicio);
-        cout << endl << "El valor " << value << " se ha eliminado en " << i << " ocasion";
-        if (i != 1) { cout << "es." << endl; } else { cout << "." << endl; }
+            } while (aux != inicio);
+        } while (i != 0);
+        cout << endl << "Se han eliminado todos los " << value << endl;
     }
+}
+void EliminarRecursivo(nodo *aux, nodo *actual, float value)
+{
+    if (aux -> siguiente != inicio)
+    {
+        cout << endl << "aux es " << aux -> valor << " y actual es " << actual -> valor << ". Voy a recursivizar";
+        EliminarRecursivo(aux -> siguiente, actual, value);
+    }
+    if (actual -> valor = value)
+    {
+        cout << endl << "Voy a eliminar " << actual -> valor;
+        EliminarUno(actual);
+        actual = actual -> anterior;
+    }
+    actual = actual -> anterior;
+    Mostrar();
 }
 void Invertir()
 {
     nodo *aux = final;
     nodo *sig;
-
     do
     {
         sig = aux -> siguiente;
@@ -253,8 +271,10 @@ void Intercambiar(int pos1, int pos2)
         aux3 = aux3 -> siguiente;
     }
 }
-int main() // probar tambien: *final siempre es *inicio -> anterior (podria prescindir de uno de el?)
+int main()
 {
+    InsertarFinal(4); InsertarFinal(5); InsertarFinal(6); InsertarFinal(7);
+    InsertarFinal(4); InsertarFinal(5); InsertarFinal(6); InsertarFinal(7); Mostrar();
     float value = 0;
     int eleccion;
     do
@@ -262,15 +282,16 @@ int main() // probar tambien: *final siempre es *inicio -> anterior (podria pres
         cout << endl << "o o o o o o o o o o MENU o o o o o o o o o o" << endl;
         cout << "[1]  Mostrar la lista" << endl;                         // Funciona bien
         cout << "[2]  Insertar nodo al principio" << endl;               // Funciona bien
-        cout << "[3]  Insertar nodo al final" << endl;                   // Funciona bien
+        cout << "[3]  Insertar nodo al final" << endl;                   // Si solo añado uno al final, Mostrar() se ralla
         cout << "[4]  Insertar nodo en la posicion elegida" << endl;     // Funciona bien
         cout << "[5]  Hallar el valor mayor" << endl;                    // Funciona bien
         cout << "[6]  Mostrar la suma todos los nodos" << endl;          // Funciona bien
         cout << "[7]  Comprobar si la lista esta ordenada" << endl;      // Funciona bien
-        cout << "[8]  Eliminar valor elegido y sus iguales" << endl;     // Si el 1º nodo tiene ese valor, solo borra el 1º
+        cout << "[8]  Eliminar valor elegido y sus iguales" << endl;     // Iterativa bien. Recursiva mal
         cout << "[9]  Invertir la lista" << endl;                        // Funciona bien
-        cout << "[10] Intercambiar 2 elementos elegidos" << endl;        // Se ralla al cambiar el 1º o ultimo nodo
+        cout << "[10] Intercambiar 2 elementos elegidos" << endl;        // Se ralla al cambiar el 1º o el ultimo
         cout << "[0]  SALIR" << endl;                                    // Funciona bien
+        cout << "o o o o o o o o o o o o o o o o o o o o o o" << endl;
         cout << "INGRESE SU ELECCION: ";
         cin >> eleccion;
 
@@ -301,9 +322,17 @@ int main() // probar tambien: *final siempre es *inicio -> anterior (podria pres
             case 6: SumarTodo(); break;
             case 7: ComprobarOrdenada(); break;
             case 8:
+                int forma;
                 cout << "Indique el valor que desea eliminar: ";
                 cin >> value;
-                Eliminar(value);
+                cout << "Quieres eliminar de forma iterativa (0) o recursiva (1)? ";
+                cin >> forma;
+                if (forma == 0) { EliminarIterativo(value); }
+                else if (forma == 1)
+                {
+                    EliminarRecursivo(inicio, final, value);
+                }
+                else { cout << "El valor insertado no se acepta. Prueba otra vez." << endl; }
                 break;
             case 9: Invertir(); break;
             case 10:
