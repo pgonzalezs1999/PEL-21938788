@@ -165,14 +165,13 @@ void ComprobarOrdenada()
 void Eliminar(int value)
 {
     nodo *aux = inicio;
-
     int i = 0;
     if (inicio == NULL) { cout << endl << "Su lista esta vacia." << endl; }
     else
     {
         do
         {
-            if (aux -> valor == value)
+            if (aux -> valor == value) //pruebas
             {
                 if (inicio == final)
                 {
