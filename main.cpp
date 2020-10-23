@@ -282,14 +282,16 @@ int main()
         cout << endl << "o o o o o o o o o o MENU o o o o o o o o o o" << endl;
         cout << "[1]  Mostrar la lista" << endl;                         // Funciona bien
         cout << "[2]  Insertar nodo al principio" << endl;               // Funciona bien
-        cout << "[3]  Insertar nodo al final" << endl;                   // Si solo añado uno al final, Mostrar() se ralla
+        cout << "[3]  Insertar nodo al final" << endl;
+        // Si lo unico que hago es añadir un nodo al final, y despues mostrar, la funcion Mostrar() se atasca
         cout << "[4]  Insertar nodo en la posicion elegida" << endl;     // Funciona bien
         cout << "[5]  Hallar el valor mayor" << endl;                    // Funciona bien
         cout << "[6]  Mostrar la suma todos los nodos" << endl;          // Funciona bien
         cout << "[7]  Comprobar si la lista esta ordenada" << endl;      // Funciona bien
         cout << "[8]  Eliminar valor elegido y sus iguales" << endl;     // Iterativa bien. Recursiva mal
         cout << "[9]  Invertir la lista" << endl;                        // Funciona bien
-        cout << "[10] Intercambiar 2 elementos elegidos" << endl;        // Se ralla al cambiar el 1º o el ultimo
+        cout << "[10] Intercambiar 2 elementos elegidos" << endl;
+        // Bien, salvo cuando quiero cambiar el 1º o el ultimo nodo
         cout << "[0]  SALIR" << endl;                                    // Funciona bien
         cout << "o o o o o o o o o o o o o o o o o o o o o o" << endl;
         cout << "INGRESE SU ELECCION: ";
