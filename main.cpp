@@ -171,7 +171,7 @@ void Eliminar(int value)
     {
         do
         {
-            if (aux -> valor == value) //pruebas
+            if (aux -> valor == value) //hola
             {
                 if (inicio == final)
                 {
