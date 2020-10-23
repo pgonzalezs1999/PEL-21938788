@@ -273,8 +273,6 @@ void Intercambiar(int pos1, int pos2)
 }
 int main()
 {
-    InsertarFinal(4); InsertarFinal(5); InsertarFinal(6); InsertarFinal(7);
-    InsertarFinal(4); InsertarFinal(5); InsertarFinal(6); InsertarFinal(7); Mostrar();
     float value = 0;
     int eleccion;
     do
